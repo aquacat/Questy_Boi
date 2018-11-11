@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using UnityEngine.UI;
+
 using System.Collections;
 
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
 	Rigidbody rb;
 
-
+	public Text winText;
 
 	[Tooltip("Current players speed")]
 
@@ -28,6 +30,16 @@ public class PlayerMovementScript : MonoBehaviour {
 
 	[HideInInspector]public Vector3 cameraPosition;
 
+	void SetWinText(){
+        string winning = "#1 victory royale \n";
+		Debug.Log("In set win text");
+        foreach (string desc in GM.questDescriptions.Values)
+        {
+            winning += desc + "\n";
+        }
+        winText.text = winning;
+		Debug.Log(winning);
+    }
 
 
 	/*
@@ -37,6 +49,7 @@ public class PlayerMovementScript : MonoBehaviour {
 	 * And grabbing the mainCamera from Players child transform.
 
 	 */
+	 SimpleGameManager GM;
 
 	void Awake(){
 
@@ -48,7 +61,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
 		ignoreLayer = 1 << LayerMask.NameToLayer ("Player");
 
-
+		GM = SimpleGameManager.Instance;
 
 	}
 
@@ -678,7 +691,6 @@ public class PlayerMovementScript : MonoBehaviour {
 
 	public AudioSource _runSound;
 
-	public AudioSource WinSound;
 
 	void OnTriggerEnter(Collider other) 
 
@@ -689,8 +701,7 @@ public class PlayerMovementScript : MonoBehaviour {
         {
 
             other.gameObject.SetActive (false);
-
-			WinSound.Play();
+			SetWinText();
 
         }
 

@@ -15,22 +15,23 @@ public class SimpleGameManager : MonoBehaviour
 
 {
     public float speed;
+
     public Text countText;
-    public Text winText;
-    public bool Quest1 = false;
 
-    public bool Quest2 = false;
+    private bool Quest1 = false;
 
-    public bool Quest3 = false;
+    private bool Quest2 = false;
 
-    public bool Quest4 = false;
+    private bool Quest3 = false;
 
-    public bool Quest5 = false;
+    private bool Quest4 = false;
 
-    public bool Quest6 = false;
+    private bool Quest5 = false;
+
+    private bool Quest6 = false;
     private Dictionary<string, bool> questStates = new Dictionary<string, bool>();
 
-    private Dictionary<string, string> questDescriptions = new Dictionary<string, string>();
+    public Dictionary<string, string> questDescriptions = new Dictionary<string, string>();
     protected SimpleGameManager()
     {
 
@@ -52,7 +53,7 @@ public class SimpleGameManager : MonoBehaviour
 
         questStates.Add("Dummie 5", false);
 
-        questDescriptions.Add("Dummie 5", "Good Shot!");
+        questDescriptions.Add("Dummie 5", "Good Shooting");
         
         questStates.Add("Dummie 6", false);
 
@@ -71,6 +72,7 @@ public class SimpleGameManager : MonoBehaviour
         }
         countText.text = "Kills: " + count.ToString();
     }
+    
 
     private static SimpleGameManager instance = null;
 
@@ -161,14 +163,13 @@ public class SimpleGameManager : MonoBehaviour
         {
 
             questStates[questName] = true;
-            SetCountText();
+            
 
         }
         if (AreQuestsFinished ()){
             OpenTheGate();
-            SetCountText();
         }
-
+        SetCountText();
     }
 
 
